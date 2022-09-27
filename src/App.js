@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Main from "./components/Main";
+import SearchForm from "./components/SearchForm";
 
 function App() {
+  const [animeList, setAnimeList] = useState([]);
+  const [search, setSearch] = useState("code geass");
+
+  const fetchAnime = async (query) => {
+    const response = await fetch(
+      `https://api.jikan.moe/v4/anime?q=${query}&order_by=members&sort=desc&limit=25`
+    );
+    const data = await response.json();
+    console.log(data.data);
+    setAnimeList(data.data);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchAnime(search);
+  };
+
+  useEffect(() => {
+    fetchAnime(search);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SearchForm
+        handleSubmit={handleSubmit}
+        search={search}
+        setSearch={setSearch}
+      />
+      <main className="wrapper">
+        <Main animeList={animeList} />
+      </main>
+    </>
   );
 }
 
