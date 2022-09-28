@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchForm = ({ handleSubmit, search, setSearch }) => {
+const SearchForm = ({ handleSubmit, search, setSearch, animeList }) => {
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <h2>Search Animes</h2>
@@ -11,6 +11,9 @@ const SearchForm = ({ handleSubmit, search, setSearch }) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      {animeList.length === 0 ? (
+        <div className="error">Anime Not Found!</div>
+      ) : null}
     </form>
   );
 };

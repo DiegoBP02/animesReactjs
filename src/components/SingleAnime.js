@@ -8,7 +8,7 @@ const SingleAnime = ({ anime }) => {
         <img src={anime.images.jpg.large_image_url} alt={title} />
         <div className="anime-info">
           <h4 className="title">{title}</h4>
-          <p>{year}</p>
+          <p>{year === "" ? null : year}</p>
         </div>
       </article>
     </a>
