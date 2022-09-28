@@ -33,6 +33,7 @@ function App() {
         search={search}
         setSearch={setSearch}
         animeList={animeList}
+        isLoading={isLoading}
       />
       <main className="wrapper">
         <Main animeList={animeList} isLoading={isLoading} />
